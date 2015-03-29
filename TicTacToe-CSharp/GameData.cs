@@ -24,8 +24,27 @@ namespace TicTacToe_CSharp
 		public GameData()
 		{
 			cellData = new CellState[3,3];
+			reset();
 		}
 		
+		public void reset(){
+			for(int i = 0 ; i < Width ; i++)
+			{
+				for(int j = 0 ; j < Height ; j++)
+				{
+					cellData[i,j] = CellState.EMPTY;
+				}
+			}
+			xTurn = true;
+		}
+					
+		public void changeTurn()
+		{
+			if(xTurn)
+				xTurn = false;
+			else
+				xTurn = true;
+		}
 		
 		#region Properties 
 		
@@ -35,15 +54,7 @@ namespace TicTacToe_CSharp
 		}
 		
 		#endregion
-		
-		
-		public void changeTurn()
-		{
-			if(xTurn)
-				xTurn = false;
-			else
-				xTurn = true;
-		}
+
 		
 		/// <summary>
 		/// An enumeration to give the three possible states of each cell on our board
