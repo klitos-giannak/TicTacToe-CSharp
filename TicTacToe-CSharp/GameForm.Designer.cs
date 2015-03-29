@@ -8,12 +8,13 @@
  */
 namespace TicTacToe_CSharp
 {
-	partial class MainForm
+	partial class GameForm
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
+		private TicTacToe_CSharp.GameBoardView boardView;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -36,12 +37,28 @@ namespace TicTacToe_CSharp
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.boardView = new TicTacToe_CSharp.GameBoardView();
+			this.SuspendLayout();
 			// 
-			// MainForm
+			// boardView
 			// 
+			this.boardView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.boardView.Location = new System.Drawing.Point(0, 0);
+			this.boardView.Name = "boardView";
+			this.boardView.Size = new System.Drawing.Size(284, 261);
+			this.boardView.TabIndex = 0;
+			this.boardView.Text = "boardView";
+			// 
+			// GameForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(284, 261);
+			this.Controls.Add(this.boardView);
+			this.Name = "GameForm";
 			this.Text = "TicTacToe-CSharp";
-			this.Name = "MainForm";
+			this.ResumeLayout(false);
+
 		}
 	}
 }
