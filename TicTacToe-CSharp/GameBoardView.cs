@@ -16,7 +16,10 @@ namespace TicTacToe_CSharp
 	/// Description of GameBoardView.
 	/// </summary>
 	public class GameBoardView: Control
-	{		
+	{
+		private int cellWidth;
+		private int cellHeight;
+		
 		public GameBoardView()
 		{
 		}
@@ -25,15 +28,22 @@ namespace TicTacToe_CSharp
 		{
 			base.OnPaint(e);
 			
-			int cellWidth = Size.Width / 3;
-			int cellHeight = Size.Height / 3;
-			
 			Pen pen = new Pen(ForeColor);
 			
 			e.Graphics.DrawLine(pen, cellWidth, 0, cellWidth, Size.Height);
 			e.Graphics.DrawLine(pen, cellWidth * 2, 0, cellWidth * 2, Size.Height);
 			e.Graphics.DrawLine(pen, 0, cellHeight, Size.Width, cellHeight);
 			e.Graphics.DrawLine(pen, 0, cellHeight * 2, Size.Width, cellHeight * 2);
+		}
+		
+		protected override void OnResize(EventArgs e)
+		{
+			base.OnResize(e);
+			
+			cellWidth = Size.Width / 3;
+			cellHeight = Size.Height / 3;
+			
+			Invalidate();
 		}
 	}
 }
