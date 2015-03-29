@@ -46,13 +46,27 @@ namespace TicTacToe_CSharp
 				xTurn = true;
 		}
 		
-		#region Properties 
+		#region Properties / Indexers
+		public int Width
+		{
+			get { return cellData.GetLength(0); }
+		}
+		
+		public int Height
+		{
+			get { return cellData.GetLength(1); }
+		}
+		
+		public CellState this[int cx, int cy]
+		{
+			get { return cellData[cx, cy]; }
+			set { cellData[cx, cy] = value; }
+		}
 		
 		public bool XTurn
 		{
 			get{ return xTurn; }
 		}
-		
 		#endregion
 
 		
