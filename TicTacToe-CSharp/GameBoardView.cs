@@ -25,8 +25,6 @@ namespace TicTacToe_CSharp
 		public GameBoardView()
 		{
 			gameData = new GameData();
-			gameData[0,0] = GameData.CellState.O;
-			gameData[1,0] = GameData.CellState.X;
 		}
 		
 		protected override void OnPaint(PaintEventArgs e)

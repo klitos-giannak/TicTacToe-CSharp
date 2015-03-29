@@ -48,6 +48,7 @@ namespace TicTacToe_CSharp
 			this.boardView.Size = new System.Drawing.Size(284, 261);
 			this.boardView.TabIndex = 0;
 			this.boardView.Text = "boardView";
+			this.boardView.Click += new System.EventHandler(this.BoardViewClick);
 			// 
 			// GameForm
 			// 

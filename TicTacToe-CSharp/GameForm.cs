@@ -29,5 +29,14 @@ namespace TicTacToe_CSharp
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
+		
+		void BoardViewClick(object sender, EventArgs e)
+		{
+			if(e is MouseEventArgs)
+			{
+				MouseEventArgs me = (MouseEventArgs) e;
+				this.boardView.onClick(new Point(me.X, me.Y));
+			}
+		}
 	}
 }
