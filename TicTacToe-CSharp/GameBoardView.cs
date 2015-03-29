@@ -141,6 +141,29 @@ namespace TicTacToe_CSharp
 			}
 		}
 		
+		/// <summary>
+		/// Checks if the grid is full and calls showTieMessage()
+		/// </summary>
+		private void checkGameOver()
+		{
+			bool gameOver = true;
+			for(int i = 0 ; i<gameData.Width ; i++)
+			{
+				for(int j = 0 ; j<gameData.Height ; j++)
+				{
+					if(gameData[i,j] == GameData.CellState.EMPTY)
+					{
+						gameOver = false;
+						break;
+					}
+				}
+			}
+			
+			if(gameOver)
+				showTieMessage();
+				
+		}
+		
 		private void checkWin(){
 			GameData.CellState winner = checkWinHorizontal();
 			if(winner == GameData.CellState.EMPTY)
@@ -153,6 +176,8 @@ namespace TicTacToe_CSharp
 			{
 				showWinMessage(winner);
 			}
+			else
+				checkGameOver();
 		}
 		
 		/// <summary>
@@ -204,6 +229,11 @@ namespace TicTacToe_CSharp
 		private void showWinMessage(GameData.CellState winner)
 		{
 			MessageBox.Show("Player " + winner + " wins");
+		}
+		
+		private void showTieMessage()
+		{
+			MessageBox.Show("The game is a tie.\nNobody Wins.");
 		}
 	}
 }
