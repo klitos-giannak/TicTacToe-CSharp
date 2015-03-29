@@ -25,9 +25,8 @@ namespace TicTacToe_CSharp
 			//
 			InitializeComponent();
 			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
+			GameData gameData = new GameData();
+			this.boardView.GData = gameData;
 		}
 		
 		void BoardViewClick(object sender, EventArgs e)

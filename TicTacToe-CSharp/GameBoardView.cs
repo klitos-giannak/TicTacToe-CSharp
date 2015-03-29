@@ -25,9 +25,13 @@ namespace TicTacToe_CSharp
 		
 		private GameData gameData;
 		
+		public GameData GData {
+			get { return gameData; }
+			set { gameData = value;	}
+		}
+		
 		public GameBoardView()
 		{
-			gameData = new GameData();
 			gameLocked = false;
 		}
 		
@@ -42,14 +46,17 @@ namespace TicTacToe_CSharp
 			e.Graphics.DrawLine(pen, 0, cellHeight, Size.Width, cellHeight);
 			e.Graphics.DrawLine(pen, 0, cellHeight * 2, Size.Width, cellHeight * 2);
 			
-			for(int i = 0 ; i < gameData.Width ; i++)
+			if(GData != null)
 			{
-				for(int j = 0 ; j < gameData.Height ; j++)
+				for(int i = 0 ; i < GData.Width ; i++)
 				{
-					if(gameData[i, j] == GameData.CellState.X)
-						drawX(pen, e.Graphics, i, j);
-					else if(gameData[i, j] == GameData.CellState.O)
-						drawO(pen, e.Graphics, i, j);
+					for(int j = 0 ; j < GData.Height ; j++)
+					{
+						if(GData[i, j] == GameData.CellState.X)
+							drawX(pen, e.Graphics, i, j);
+						else if(GData[i, j] == GameData.CellState.O)
+							drawO(pen, e.Graphics, i, j);
+					}
 				}
 			}
 		}
@@ -137,14 +144,14 @@ namespace TicTacToe_CSharp
 		/// <param name="y"></param>
 		private void nextMove(int x, int y)
 		{
-			if(gameData[x,y] == GameData.CellState.EMPTY)
+			if(GData[x,y] == GameData.CellState.EMPTY)
 			{
-				if(gameData.XTurn)
-					gameData[x,y] = GameData.CellState.X;
+				if(GData.XTurn)
+					GData[x,y] = GameData.CellState.X;
 				else
-					gameData[x,y] = GameData.CellState.O;
+					GData[x,y] = GameData.CellState.O;
 			
-				gameData.changeTurn();
+				GData.changeTurn();
 			}
 		}
 		
@@ -154,11 +161,11 @@ namespace TicTacToe_CSharp
 		private void checkGameOver()
 		{
 			bool gameOver = true;
-			for(int i = 0 ; i<gameData.Width ; i++)
+			for(int i = 0 ; i<GData.Width ; i++)
 			{
-				for(int j = 0 ; j<gameData.Height ; j++)
+				for(int j = 0 ; j<GData.Height ; j++)
 				{
-					if(gameData[i,j] == GameData.CellState.EMPTY)
+					if(GData[i,j] == GameData.CellState.EMPTY)
 					{
 						gameOver = false;
 						break;
@@ -197,11 +204,11 @@ namespace TicTacToe_CSharp
 		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
 		private GameData.CellState checkWinHorizontal()
 		{
-			for(int i = 0 ; i<gameData.Height ; i++)
+			for(int i = 0 ; i<GData.Height ; i++)
 			{
-				if( gameData[0,i] != GameData.CellState.EMPTY && 
-				   gameData[0,i] == gameData[1,i] && gameData[1,i] == gameData[2,i] )
-					return gameData[0,i];
+				if( GData[0,i] != GameData.CellState.EMPTY && 
+				   GData[0,i] == GData[1,i] && GData[1,i] == GData[2,i] )
+					return GData[0,i];
 			}
 			return GameData.CellState.EMPTY;
 		}
@@ -212,11 +219,11 @@ namespace TicTacToe_CSharp
 		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
 		private GameData.CellState checkWinVertical()
 		{
-			for(int i = 0 ; i<gameData.Width ; i++)
+			for(int i = 0 ; i<GData.Width ; i++)
 			{
-				if( gameData[i,0] != GameData.CellState.EMPTY &&
-				   gameData[i,0] == gameData[i,1] && gameData[i,1] == gameData[i,2] )
-					return gameData[i,0];
+				if( GData[i,0] != GameData.CellState.EMPTY &&
+				   GData[i,0] == GData[i,1] && GData[i,1] == GData[i,2] )
+					return GData[i,0];
 			}
 			return GameData.CellState.EMPTY;
 		}
@@ -227,12 +234,12 @@ namespace TicTacToe_CSharp
 		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
 		private GameData.CellState checkWinDiagonally()
 		{
-			if( gameData[0,0] != GameData.CellState.EMPTY &&
-			   gameData[0,0] == gameData[1,1] && gameData[1,1] == gameData[2,2] )
-				return gameData[0,0];
-			if( gameData[2,0] != GameData.CellState.EMPTY &&
-			   gameData[2,0] == gameData[1,1] && gameData[1,1] == gameData[0,2] )
-				return gameData[2,0];
+			if( GData[0,0] != GameData.CellState.EMPTY &&
+			   GData[0,0] == GData[1,1] && GData[1,1] == GData[2,2] )
+				return GData[0,0];
+			if( GData[2,0] != GameData.CellState.EMPTY &&
+			   GData[2,0] == GData[1,1] && GData[1,1] == GData[0,2] )
+				return GData[2,0];
 			
 			return GameData.CellState.EMPTY;
 		}
@@ -249,7 +256,7 @@ namespace TicTacToe_CSharp
 		
 		public void restartGame()
 		{
-			gameData.reset();
+			GData.reset();
 			gameLocked = false;
 			Invalidate();
 		}
