@@ -20,8 +20,13 @@ namespace TicTacToe_CSharp
 		private int cellWidth;
 		private int cellHeight;
 		
+		private GameData gameData;
+		
 		public GameBoardView()
 		{
+			gameData = new GameData();
+			gameData[0,0] = GameData.CellState.O;
+			gameData[1,0] = GameData.CellState.X;
 		}
 		
 		protected override void OnPaint(PaintEventArgs e)
@@ -39,7 +44,10 @@ namespace TicTacToe_CSharp
 			{
 				for(int j = 0 ; j < 3 ; j++)
 				{
-					drawO(pen, e.Graphics, i, j);
+					if(gameData[i, j] == GameData.CellState.X)
+						drawX(pen, e.Graphics, i, j);
+					else if(gameData[i, j] == GameData.CellState.O)
+						drawO(pen, e.Graphics, i, j);
 				}
 			}
 		}
