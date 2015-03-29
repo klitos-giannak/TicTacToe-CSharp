@@ -40,13 +40,13 @@ namespace TicTacToe_CSharp
 			if(e is MouseEventArgs)
 			{
 				MouseEventArgs me = (MouseEventArgs) e;
-				this.boardView.onClick(new Point(me.X, me.Y));
+				gameController.onClick(new Point(me.X, me.Y));
 			}
 		}
 		
 		void RestartButtonClick(object sender, EventArgs e)
 		{
-			this.boardView.restartGame();
+			gameController.restartGame();
 		}
 	}
 }

@@ -21,7 +21,6 @@ namespace TicTacToe_CSharp
 				
 		private int cellWidth;
 		private int cellHeight;
-		private bool gameLocked;
 		
 		private GameData gameData;
 		
@@ -32,7 +31,30 @@ namespace TicTacToe_CSharp
 		
 		public GameBoardView()
 		{
-			gameLocked = false;
+		}
+		
+		public int convertWindowToGridXCoordinate(int x)
+		{
+			if(x < cellWidth)
+				return 0;
+			else if(x < 2*cellWidth)
+				return 1;
+			else if(x < 3*cellWidth)
+				return 2;
+			else
+				return -1;
+		}
+		
+		public int convertWindowToGridYCoordinate(int y)
+		{
+			if(y < cellHeight)
+				return 0;
+			else if(y < 2*cellHeight)
+				return 1;
+			else if(y < 3*cellHeight)
+				return 2;
+			else
+				return -1;
 		}
 		
 		protected override void OnPaint(PaintEventArgs e)
@@ -102,163 +124,6 @@ namespace TicTacToe_CSharp
 			int w1 = cellWidth - 2*OFFSET;
 			int h1 = cellHeight - 2*OFFSET;
 			g.DrawEllipse(pen, x1, y1, w1, h1);
-		}
-		
-		/// <summary>
-		/// Handles click actions on a certain Point. First it locates the cell in which
-		/// the click happened and then calls nextMove with the (translated) grid coordinates
-		/// for the specific cell
-		/// </summary>
-		/// <param name="click">The window coordinates where the click happened</param>
-		public void onClick(Point click)
-		{
-			if(gameLocked)
-				return;
-			
-			int x = -1;
-			int y = -1;
-			if(click.X < cellWidth)
-				x = 0;
-			else if(click.X < 2*cellWidth)
-				x = 1;
-			else
-				x = 2;
-			
-			if(click.Y < cellHeight)
-				y = 0;
-			else if(click.Y < 2*cellHeight)
-				y = 1;
-			else
-				y = 2;
-			        
-			nextMove(x, y);
-			Invalidate();
-			checkWin();
-		}
-		
-		/// <summary>
-		/// Handles the next move on the cell specified by x and y
-		/// and sets the data to the gameData object
-		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		private void nextMove(int x, int y)
-		{
-			if(GData[x,y] == GameData.CellState.EMPTY)
-			{
-				if(GData.XTurn)
-					GData[x,y] = GameData.CellState.X;
-				else
-					GData[x,y] = GameData.CellState.O;
-			
-				GData.changeTurn();
-			}
-		}
-		
-		/// <summary>
-		/// Checks if the grid is full and calls showTieMessage()
-		/// </summary>
-		private void checkGameOver()
-		{
-			bool gameOver = true;
-			for(int i = 0 ; i<GData.Width ; i++)
-			{
-				for(int j = 0 ; j<GData.Height ; j++)
-				{
-					if(GData[i,j] == GameData.CellState.EMPTY)
-					{
-						gameOver = false;
-						break;
-					}
-				}
-			}
-			
-			if(gameOver)
-			{
-				showTieMessage();
-				gameLocked = true;
-			}
-				
-		}
-		
-		private void checkWin(){
-			GameData.CellState winner = checkWinHorizontal();
-			if(winner == GameData.CellState.EMPTY)
-				winner = checkWinVertical();
-			if(winner == GameData.CellState.EMPTY)
-				winner = checkWinDiagonally();
-			
-			//if a winner is found then show the win message
-			if(winner != GameData.CellState.EMPTY)
-			{
-				gameLocked = true;
-				showWinMessage(winner);
-			}
-			else
-				checkGameOver();
-		}
-		
-		/// <summary>
-		/// Checks for a winner horizontally
-		/// </summary>
-		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
-		private GameData.CellState checkWinHorizontal()
-		{
-			for(int i = 0 ; i<GData.Height ; i++)
-			{
-				if( GData[0,i] != GameData.CellState.EMPTY && 
-				   GData[0,i] == GData[1,i] && GData[1,i] == GData[2,i] )
-					return GData[0,i];
-			}
-			return GameData.CellState.EMPTY;
-		}
-		
-		/// <summary>
-		/// Checks for a winner vertically
-		/// </summary>
-		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
-		private GameData.CellState checkWinVertical()
-		{
-			for(int i = 0 ; i<GData.Width ; i++)
-			{
-				if( GData[i,0] != GameData.CellState.EMPTY &&
-				   GData[i,0] == GData[i,1] && GData[i,1] == GData[i,2] )
-					return GData[i,0];
-			}
-			return GameData.CellState.EMPTY;
-		}
-		
-		/// <summary>
-		/// Checks for a winner diagonally
-		/// </summary>
-		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
-		private GameData.CellState checkWinDiagonally()
-		{
-			if( GData[0,0] != GameData.CellState.EMPTY &&
-			   GData[0,0] == GData[1,1] && GData[1,1] == GData[2,2] )
-				return GData[0,0];
-			if( GData[2,0] != GameData.CellState.EMPTY &&
-			   GData[2,0] == GData[1,1] && GData[1,1] == GData[0,2] )
-				return GData[2,0];
-			
-			return GameData.CellState.EMPTY;
-		}
-		
-		private void showWinMessage(GameData.CellState winner)
-		{
-			MessageBox.Show("Player " + winner + " wins");
-		}
-		
-		private void showTieMessage()
-		{
-			MessageBox.Show("The game is a tie.\nNobody Wins.");
-		}
-		
-		public void restartGame()
-		{
-			GData.reset();
-			gameLocked = false;
-			Invalidate();
 		}
 	}
 }
