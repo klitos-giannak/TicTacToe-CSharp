@@ -18,6 +18,8 @@ namespace TicTacToe_CSharp
 	/// </summary>
 	public partial class GameForm : Form
 	{
+		private GameControler gameController;
+		
 		public GameForm()
 		{
 			//
@@ -26,7 +28,11 @@ namespace TicTacToe_CSharp
 			InitializeComponent();
 			
 			GameData gameData = new GameData();
+			
+			//the boardView object is defined and instantiated in GameForm.Designer.cs by visual tools
 			this.boardView.GData = gameData;
+			
+			gameController = new GameControler(this.boardView, gameData);
 		}
 		
 		void BoardViewClick(object sender, EventArgs e)

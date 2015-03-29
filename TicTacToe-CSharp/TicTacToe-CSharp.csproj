@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameBoardView.cs" />
+    <Compile Include="GameControler.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="GameForm.cs" />
     <Compile Include="GameForm.Designer.cs">
