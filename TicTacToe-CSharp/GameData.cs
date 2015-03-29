@@ -32,10 +32,18 @@ namespace TicTacToe_CSharp
 		public bool XTurn
 		{
 			get{ return xTurn; }
-			set{ xTurn = value; }
 		}
 		
 		#endregion
+		
+		
+		public void changeTurn()
+		{
+			if(xTurn)
+				xTurn = false;
+			else
+				xTurn = true;
+		}
 		
 		/// <summary>
 		/// An enumeration to give the three possible states of each cell on our board
