@@ -15,6 +15,7 @@ namespace TicTacToe_CSharp
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 		private TicTacToe_CSharp.GameBoardView boardView;
+		private System.Windows.Forms.Button restartButton;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -38,11 +39,14 @@ namespace TicTacToe_CSharp
 		private void InitializeComponent()
 		{
 			this.boardView = new TicTacToe_CSharp.GameBoardView();
+			this.restartButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// boardView
 			// 
-			this.boardView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.boardView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.boardView.Location = new System.Drawing.Point(0, 0);
 			this.boardView.Name = "boardView";
 			this.boardView.Size = new System.Drawing.Size(284, 261);
@@ -50,12 +54,24 @@ namespace TicTacToe_CSharp
 			this.boardView.Text = "boardView";
 			this.boardView.Click += new System.EventHandler(this.BoardViewClick);
 			// 
+			// restartButton
+			// 
+			this.restartButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.restartButton.Location = new System.Drawing.Point(107, 268);
+			this.restartButton.Name = "restartButton";
+			this.restartButton.Size = new System.Drawing.Size(70, 24);
+			this.restartButton.TabIndex = 1;
+			this.restartButton.Text = "Restart";
+			this.restartButton.UseVisualStyleBackColor = true;
+			// 
 			// GameForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(284, 261);
+			this.ClientSize = new System.Drawing.Size(284, 301);
+			this.Controls.Add(this.restartButton);
 			this.Controls.Add(this.boardView);
+			this.MinimumSize = new System.Drawing.Size(150, 170);
 			this.Name = "GameForm";
 			this.Text = "TicTacToe-CSharp";
 			this.ResumeLayout(false);
