@@ -119,6 +119,7 @@ namespace TicTacToe_CSharp
 			        
 			nextMove(x, y);
 			Invalidate();
+			checkWin();
 		}
 		
 		/// <summary>
@@ -137,6 +138,20 @@ namespace TicTacToe_CSharp
 					gameData[x,y] = GameData.CellState.O;
 			
 				gameData.changeTurn();
+			}
+		}
+		
+		private void checkWin(){
+			GameData.CellState winner = checkWinHorizontal();
+			if(winner == GameData.CellState.EMPTY)
+				winner = checkWinVertical();
+			if(winner == GameData.CellState.EMPTY)
+				winner = checkWinDiagonally();
+			
+			//if a winner is found then show the win message
+			if(winner != GameData.CellState.EMPTY)
+			{
+				showWinMessage(winner);
 			}
 		}
 		
@@ -184,6 +199,11 @@ namespace TicTacToe_CSharp
 				return gameData[2,0];
 			
 			return GameData.CellState.EMPTY;
+		}
+		
+		private void showWinMessage(GameData.CellState winner)
+		{
+			MessageBox.Show("Player " + winner + " wins");
 		}
 	}
 }
