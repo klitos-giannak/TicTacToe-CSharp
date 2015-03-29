@@ -246,5 +246,12 @@ namespace TicTacToe_CSharp
 		{
 			MessageBox.Show("The game is a tie.\nNobody Wins.");
 		}
+		
+		public void restartGame()
+		{
+			gameData.reset();
+			gameLocked = false;
+			Invalidate();
+		}
 	}
 }
