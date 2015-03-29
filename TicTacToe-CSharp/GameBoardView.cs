@@ -17,6 +17,8 @@ namespace TicTacToe_CSharp
 	/// </summary>
 	public class GameBoardView: Control
 	{
+		private const int OFFSET = 10;
+				
 		private int cellWidth;
 		private int cellHeight;
 		private bool gameLocked;
@@ -71,10 +73,10 @@ namespace TicTacToe_CSharp
 		/// <param name="y">The y to define the cell in grid coordinates (0 to 2)</param>
 		private void drawX(Pen pen, Graphics g, int x, int y)
 		{
-			int x1 = x*cellWidth;
-			int y1 = y*cellHeight;
-			int x2 = x*cellWidth + cellWidth;
-			int y2 = y*cellHeight + cellHeight;
+			int x1 = x*cellWidth + OFFSET;
+			int y1 = y*cellHeight + OFFSET;
+			int x2 = x*cellWidth + cellWidth - OFFSET;
+			int y2 = y*cellHeight + cellHeight - OFFSET;
 			g.DrawLine(pen, x1, y1, x2, y2);
 			g.DrawLine(pen, x1, y2, x2, y1);
 		}
@@ -88,10 +90,10 @@ namespace TicTacToe_CSharp
 		/// <param name="y">The y to define the cell in grid coordinates (0 to 2)</param>
 		private void drawO(Pen pen, Graphics g, int x, int y)
 		{
-			int x1 = x*cellWidth;
-			int y1 = y*cellHeight;
-			int w1 = cellWidth;
-			int h1 = cellHeight;
+			int x1 = x*cellWidth + OFFSET;
+			int y1 = y*cellHeight + OFFSET;
+			int w1 = cellWidth - 2*OFFSET;
+			int h1 = cellHeight - 2*OFFSET;
 			g.DrawEllipse(pen, x1, y1, w1, h1);
 		}
 		
