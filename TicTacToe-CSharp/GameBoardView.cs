@@ -94,5 +94,53 @@ namespace TicTacToe_CSharp
 			int h1 = cellHeight;
 			g.DrawEllipse(pen, x1, y1, w1, h1);
 		}
+		
+		/// <summary>
+		/// Handles click actions on a certain Point. First it locates the cell in which
+		/// the click happened and then calls nextMove with the (translated) grid coordinates
+		/// for the specific cell
+		/// </summary>
+		/// <param name="click">The window coordinates where the click happened</param>
+		public void onClick(Point click)
+		{			
+			int x = -1;
+			int y = -1;
+			if(click.X < cellWidth)
+				x = 0;
+			else if(click.X < 2*cellWidth)
+				x = 1;
+			else
+				x = 2;
+			
+			if(click.Y < cellHeight)
+				y = 0;
+			else if(click.Y < 2*cellHeight)
+				y = 1;
+			else
+				y = 2;
+			        
+			nextMove(x, y);
+			Invalidate();
+		}
+		
+		/// <summary>
+		/// Handles the next move on the cell specified by x and y
+		/// and sets the data to the gameData object
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		private void nextMove(int x, int y)
+		{
+			if(gameData[x,y] == GameData.CellState.EMPTY)
+			{
+				if(gameData.XTurn)
+					gameData[x,y] = GameData.CellState.X;
+				else
+					gameData[x,y] = GameData.CellState.O;
+			
+				gameData.changeTurn();
+			}
+		}
+		
 	}
 }
