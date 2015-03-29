@@ -39,7 +39,7 @@ namespace TicTacToe_CSharp
 			{
 				for(int j = 0 ; j < 3 ; j++)
 				{
-						drawX(pen, e.Graphics, i, j);
+					drawO(pen, e.Graphics, i, j);
 				}
 			}
 		}
@@ -62,6 +62,15 @@ namespace TicTacToe_CSharp
 			int y2 = y*cellHeight + cellHeight;
 			g.DrawLine(pen, x1, y1, x2, y2);
 			g.DrawLine(pen, x1, y2, x2, y1);
+		}
+		
+		private void drawO(Pen pen, Graphics g, int x, int y)
+		{
+			int x1 = x*cellWidth;
+			int y1 = y*cellHeight;
+			int w1 = cellWidth;
+			int h1 = cellHeight;
+			g.DrawEllipse(pen, x1, y1, w1, h1);
 		}
 	}
 }
