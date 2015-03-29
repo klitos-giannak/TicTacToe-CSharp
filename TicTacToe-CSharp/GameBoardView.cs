@@ -34,6 +34,14 @@ namespace TicTacToe_CSharp
 			e.Graphics.DrawLine(pen, cellWidth * 2, 0, cellWidth * 2, Size.Height);
 			e.Graphics.DrawLine(pen, 0, cellHeight, Size.Width, cellHeight);
 			e.Graphics.DrawLine(pen, 0, cellHeight * 2, Size.Width, cellHeight * 2);
+			
+			for(int i = 0 ; i < 3 ; i++)
+			{
+				for(int j = 0 ; j < 3 ; j++)
+				{
+						drawX(pen, e.Graphics, i, j);
+				}
+			}
 		}
 		
 		protected override void OnResize(EventArgs e)
@@ -44,6 +52,16 @@ namespace TicTacToe_CSharp
 			cellHeight = Size.Height / 3;
 			
 			Invalidate();
+		}
+		
+		private void drawX(Pen pen, Graphics g, int x, int y)
+		{
+			int x1 = x*cellWidth;
+			int y1 = y*cellHeight;
+			int x2 = x*cellWidth + cellWidth;
+			int y2 = y*cellHeight + cellHeight;
+			g.DrawLine(pen, x1, y1, x2, y2);
+			g.DrawLine(pen, x1, y2, x2, y1);
 		}
 	}
 }
