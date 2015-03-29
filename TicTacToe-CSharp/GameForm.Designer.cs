@@ -63,6 +63,7 @@ namespace TicTacToe_CSharp
 			this.restartButton.TabIndex = 1;
 			this.restartButton.Text = "Restart";
 			this.restartButton.UseVisualStyleBackColor = true;
+			this.restartButton.Click += new System.EventHandler(this.RestartButtonClick);
 			// 
 			// GameForm
 			// 

@@ -38,5 +38,10 @@ namespace TicTacToe_CSharp
 				this.boardView.onClick(new Point(me.X, me.Y));
 			}
 		}
+		
+		void RestartButtonClick(object sender, EventArgs e)
+		{
+			this.boardView.restartGame();
+		}
 	}
 }
