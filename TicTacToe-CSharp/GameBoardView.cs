@@ -42,9 +42,9 @@ namespace TicTacToe_CSharp
 			e.Graphics.DrawLine(pen, 0, cellHeight, Size.Width, cellHeight);
 			e.Graphics.DrawLine(pen, 0, cellHeight * 2, Size.Width, cellHeight * 2);
 			
-			for(int i = 0 ; i < 3 ; i++)
+			for(int i = 0 ; i < gameData.Width ; i++)
 			{
-				for(int j = 0 ; j < 3 ; j++)
+				for(int j = 0 ; j < gameData.Height ; j++)
 				{
 					if(gameData[i, j] == GameData.CellState.X)
 						drawX(pen, e.Graphics, i, j);
