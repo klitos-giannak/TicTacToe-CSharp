@@ -54,6 +54,13 @@ namespace TicTacToe_CSharp
 			Invalidate();
 		}
 		
+		/// <summary>
+		///  The drawX method draws an X in the celldefined by x kai y 
+		/// </summary>
+		/// <param name="pen">A Pen object to draw the X with</param>
+		/// <param name="g">A Graphics object to use for calling the DrawLine method</param>
+		/// <param name="x">The x to define the cell in grid coordinates(0 to 2)</param>
+		/// <param name="y">The y to define the cell in grid coordinates (0 to 2)</param>
 		private void drawX(Pen pen, Graphics g, int x, int y)
 		{
 			int x1 = x*cellWidth;
@@ -64,6 +71,13 @@ namespace TicTacToe_CSharp
 			g.DrawLine(pen, x1, y2, x2, y1);
 		}
 		
+		/// <summary>
+		///  The drawO method draws a O in the celldefined by x kai y 
+		/// </summary>
+		/// <param name="pen">A Pen object to draw the O with</param>
+		/// <param name="g">A Graphics object to use for calling the DrawEllipse method</param>
+		/// <param name="x">The x to define the cell in grid coordinates(0 to 2)</param>
+		/// <param name="y">The y to define the cell in grid coordinates (0 to 2)</param>
 		private void drawO(Pen pen, Graphics g, int x, int y)
 		{
 			int x1 = x*cellWidth;
