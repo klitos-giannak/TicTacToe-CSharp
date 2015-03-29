@@ -140,5 +140,50 @@ namespace TicTacToe_CSharp
 			}
 		}
 		
+		/// <summary>
+		/// Checks for a winner horizontally
+		/// </summary>
+		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
+		private GameData.CellState checkWinHorizontal()
+		{
+			for(int i = 0 ; i<gameData.Height ; i++)
+			{
+				if( gameData[0,i] != GameData.CellState.EMPTY && 
+				   gameData[0,i] == gameData[1,i] && gameData[1,i] == gameData[2,i] )
+					return gameData[0,i];
+			}
+			return GameData.CellState.EMPTY;
+		}
+		
+		/// <summary>
+		/// Checks for a winner vertically
+		/// </summary>
+		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
+		private GameData.CellState checkWinVertical()
+		{
+			for(int i = 0 ; i<gameData.Width ; i++)
+			{
+				if( gameData[i,0] != GameData.CellState.EMPTY &&
+				   gameData[i,0] == gameData[i,1] && gameData[i,1] == gameData[i,2] )
+					return gameData[i,0];
+			}
+			return GameData.CellState.EMPTY;
+		}
+		
+		/// <summary>
+		/// Checks for a winner diagonally
+		/// </summary>
+		/// <returns>a CellState containing the found winner or empty if a winner was not found</returns>
+		private GameData.CellState checkWinDiagonally()
+		{
+			if( gameData[0,0] != GameData.CellState.EMPTY &&
+			   gameData[0,0] == gameData[1,1] && gameData[1,1] == gameData[2,2] )
+				return gameData[0,0];
+			if( gameData[2,0] != GameData.CellState.EMPTY &&
+			   gameData[2,0] == gameData[1,1] && gameData[1,1] == gameData[0,2] )
+				return gameData[2,0];
+			
+			return GameData.CellState.EMPTY;
+		}
 	}
 }
