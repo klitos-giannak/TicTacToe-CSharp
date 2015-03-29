@@ -19,12 +19,14 @@ namespace TicTacToe_CSharp
 	{
 		private int cellWidth;
 		private int cellHeight;
+		private bool gameLocked;
 		
 		private GameData gameData;
 		
 		public GameBoardView()
 		{
 			gameData = new GameData();
+			gameLocked = false;
 		}
 		
 		protected override void OnPaint(PaintEventArgs e)
@@ -100,7 +102,10 @@ namespace TicTacToe_CSharp
 		/// </summary>
 		/// <param name="click">The window coordinates where the click happened</param>
 		public void onClick(Point click)
-		{			
+		{
+			if(gameLocked)
+				return;
+			
 			int x = -1;
 			int y = -1;
 			if(click.X < cellWidth)
@@ -160,7 +165,10 @@ namespace TicTacToe_CSharp
 			}
 			
 			if(gameOver)
+			{
 				showTieMessage();
+				gameLocked = true;
+			}
 				
 		}
 		
@@ -174,6 +182,7 @@ namespace TicTacToe_CSharp
 			//if a winner is found then show the win message
 			if(winner != GameData.CellState.EMPTY)
 			{
+				gameLocked = true;
 				showWinMessage(winner);
 			}
 			else
